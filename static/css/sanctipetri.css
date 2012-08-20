@@ -1,0 +1,58 @@
+﻿body {
+        padding-top: 40px;
+      }
+.hero-unit {
+	background: #F0F0F0;
+	border-top: 3px solid #EBEBEB;
+	border-bottom: 1px solid #E1E1E1;
+	margin-bottom: 30px;
+	padding: 30px 0 0;
+	-webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.hero-unit h1 {
+  margin-bottom: 0;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: inherit;
+}
+
+.hero-unit p {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 27px;
+  color: inherit;
+}	  
+.ac {
+	text-align: center;
+}
+
+.big-media{
+	margin-top:20px;
+	margin-bottom: 0;
+	}
+	
+
+footer {
+	background-color:#252525;
+	border-top:0;
+	margin-top:19px;
+	padding-top:19px;
+	border-top:1px solid #bbb;
+	}
+
+footer h4{color:#999}
+footer p{color:#999}
+footer a{color:#fff}
+footer a:hover{color:#fff;text-decoration:underline}
+footer #footer-floor{background:#1b1b1b}
+footer #footer-floor h3,
+footer #footer-floor h4{color:#fff}
+footer #footer-floor #elsewhere-msg{padding-top:18px}
+footer #footer-floor #elsewhere-icons{padding-top:13px}
+footer #footer-floor #elsewhere-icons a{background:url("/img/footer-icons-sprite.png") 0 0 no-repeat;float:left;width:35px;height:35px;overflow:hidden;text-indent:-900px;margin:0 5px 0 0}
+footer #footer-floor #elsewhere-icons a.facebook{background-position:-35px 0}
+footer #footer-floor #elsewhere-icons a.blog{background-position:-70px 0}

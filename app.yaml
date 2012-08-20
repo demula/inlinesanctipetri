@@ -11,14 +11,14 @@ handlers:
 - url: /css
   static_dir: static/css
 
-- url: /media
-  static_dir: static/media
+- url: /img
+  static_dir: static/img
 
 - url: /js
   static_dir: static/js
 
 - url: /favicon\.ico
-  static_files: static/media/favicon.ico
+  static_files: static/ico/favicon.ico
   upload: favicon\.ico
 
 - url: .*
