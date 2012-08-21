@@ -1,6 +1,13 @@
-﻿body {
+﻿@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600italic);
+
+body {
         padding-top: 40px;
       }
+	  
+#logo_club {
+	margin-right: 10px;
+	}
+	
 .hero-unit {
 	background: #F0F0F0;
 	border-top: 3px solid #EBEBEB;
@@ -13,8 +20,10 @@
 }
 
 .hero-unit h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: italic;
   margin-bottom: 0;
-  font-size: 60px;
+  font-size: 40px;
   line-height: 1;
   letter-spacing: -1px;
   color: inherit;
