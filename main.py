@@ -32,5 +32,16 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render(template_values))
 
-app = webapp2.WSGIApplication([('/', MainHandler)],
+class ApuntateHandler(webapp2.RequestHandler):
+    def get(self):
+        template_values = {
+            'site_name': "Club In-Line Sancti Petri",
+            'site_address': "http://www.inlinesanctipetri.com",
+        }
+
+        template = jinja_environment.get_template('apuntate.html')
+        self.response.out.write(template.render(template_values))
+		
+app = webapp2.WSGIApplication([('/', MainHandler),
+							   ('/apuntate', ApuntateHandler)],
                               debug=True)
