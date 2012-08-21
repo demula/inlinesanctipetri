@@ -1,12 +1,32 @@
-﻿@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600italic);
+﻿@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600,600italic);
 
 body {
-        padding-top: 40px;
-      }
+    padding-top: 40px;
+}
 	  
 #logo_club {
 	margin-right: 10px;
-	}
+}
+
+.navbar .brand {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 25px;
+	font-style: italic;
+	font-weight: 600;
+	letter-spacing: -1px;
+}
+	
+.navbar .nav {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 15px;
+	margin: 0 0 0 0;
+	left: 10px;
+}
+
+.navbar .nav > li > a {
+	height: 40px;
+	padding: 20px 9px 0px 11px;
+}
 	
 .hero-unit {
 	background: #F0F0F0;
@@ -44,6 +64,12 @@ body {
 	margin-bottom: 0;
 	}
 	
+h2 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+	letter-spacing: -0.5px;
+}
 
 footer {
 	background-color:#252525;
