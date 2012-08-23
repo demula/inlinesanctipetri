@@ -16,6 +16,7 @@
 #
 import jinja2
 import os
+import random
 import webapp2
 
 jinja_environment = jinja2.Environment(
@@ -24,13 +25,26 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        header_images = ["cabecera1w.jpg", "cabecera2w.jpg", "cabecera3w.jpg", "cabecera4w.jpg"]
+        template_values = {
+		    'page_name': "Portada",
+            'site_name': "Club In-Line Sancti Petri",
+            'site_address': "http://www.inlinesanctipetri.com",
+            'header_image': random.choice(header_images)
+        }
+        template = jinja_environment.get_template('index.html')
+        self.response.out.write(template.render(template_values))
+
+class ApuntateHandler(webapp2.RequestHandler):
+    def get(self):
         template_values = {
             'site_name': "Club In-Line Sancti Petri",
             'site_address': "http://www.inlinesanctipetri.com",
         }
 
-        template = jinja_environment.get_template('index.html')
+        template = jinja_environment.get_template('apuntate.html')
         self.response.out.write(template.render(template_values))
 
-app = webapp2.WSGIApplication([('/', MainHandler)],
+app = webapp2.WSGIApplication([('/', MainHandler),
+                              ('/apuntate', ApuntateHandler)],
                               debug=True)
