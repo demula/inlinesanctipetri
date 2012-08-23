@@ -3615,7 +3615,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   display: block;
   float: left;
-  padding: 8px 20px 12px;
+  padding: 0px 20px 0px;
   margin-left: -20px;
   font-size: 20px;
   font-weight: 200;
@@ -3774,10 +3774,10 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav {
   position: relative;
-  left: 0;
+  left: 75px;
   display: block;
   float: left;
-  margin: 0 10px 0 0;
+  margin: 10px 10px 0 0;
 }
 
 .navbar .nav.pull-right {
