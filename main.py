@@ -27,6 +27,7 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         header_images = ["cabecera1w.jpg", "cabecera2w.jpg", "cabecera3w.jpg", "cabecera4w.jpg"]
         template_values = {
+		    'page_name': "Portada",
             'site_name': "Club In-Line Sancti Petri",
             'site_address': "http://www.inlinesanctipetri.com",
             'header_image': random.choice(header_images)
