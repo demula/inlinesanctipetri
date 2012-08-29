@@ -88,7 +88,7 @@ class ContactaHandler(webapp2.RequestHandler):
 class ApuntateHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Apúntate",
+            'page_name': "Apuntate",
             'site_name': "Club In-Line Sancti Petri",
             'site_address': "http://www.inlinesanctipetri.com"
         }
