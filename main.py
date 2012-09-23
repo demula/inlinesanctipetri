@@ -25,7 +25,7 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        header_images = ["cabecera1w.jpg", "cabecera2w.jpg", "cabecera3w.jpg", "cabecera4w.jpg"]
+        header_images = ["cabecera1w.jpg", "cabecera1w.jpg", "cabecera2w.jpg", "cabecera3w.jpg", "cabecera3w.jpg", "cabecera4w.jpg"]
         template_values = {
             'page_name': "Portada",
             'site_name': "Club In-Line Sancti Petri",
@@ -88,7 +88,7 @@ class ContactaHandler(webapp2.RequestHandler):
 class ApuntateHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Apúntate",
+            'page_name': "Apuntate",
             'site_name': "Club In-Line Sancti Petri",
             'site_address': "http://www.inlinesanctipetri.com"
         }
