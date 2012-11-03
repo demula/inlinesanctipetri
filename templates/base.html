@@ -1,19 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
+<meta charset="utf-8">
 <head>
 <meta http-equiv="content-type" content="text/html">
-    <meta charset="utf-8">
     <title>{{ page_name }} - {{ site_name }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web informativa del club deportivo Inline Sacti Petri. Club de hockey línea de Chiclana, Cádiz">
+    <meta name="description" content="{{ page_description }}">
     <meta name="author" content="Jesus de Mula">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="M2K49sAbOufsx4lOa1mEGDdTcH2PWpLbKnZu3kduj9E" />
 
 	
     <!-- Le styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/sanctipetri.css" rel="stylesheet">
-	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+	<!-- <link href="/css/bootstrap-responsive.css" rel="stylesheet">-->
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,7 +37,7 @@
           <a class="brand" href="/"><img id="logo_club" alt='Logo Club' src='/img/logow.jpg' />{{ site_name }}</a>
             <ul class="nav">
               <li{% if page_name == 'Portada' %} class="active" {% endif %}><a href="/">Inicio</a></li>
-              <li{% if page_name == 'Escuelas' or page_name == 'Categoria Senior' %} class="active" {% endif %}><a href="/escuelas/">Escuelas</a></li>
+              <li{% if page_name == 'Escuelas' %} class="active" {% endif %}><a href="/escuelas/">Escuelas</a></li>
               <li{% if page_name == 'Competiciones' %} class="active" {% endif %}><a href="/competiciones/">Competiciones</a></li>
               <li{% if page_name == 'Quienes Somos' %} class="active" {% endif %}><a href="/quienes-somos/">Quienes somos</a></li>
               <li{% if page_name == 'Contacta' %} class="active" {% endif %}><a href="/contacta/">Contacta</a></li>
@@ -65,11 +66,11 @@
                     <a href='/escuelas/#patinaje'>Patinaje para niños</a>
                   </li>
 				  <li>
-                    <a href='/senior/#patinaje'>Patinaje Adultos</a>
+                    <a href='/escuelas/#patinaje'>Patinaje Adultos</a>
 					<span class='label success'>Nuevo</span>
                   </li>
                   <li>
-                    <a href='/senior/#equipo'>Senior</a>
+                    <a href='/quienes-somos/#equipo'>Senior</a>
                   </li>
                 </ul>
               </div>
@@ -109,7 +110,7 @@
                     <a href='/contacta/'>Contacta</a>
                   </li>
                   <li>
-                    <a href='/#patrocinadores'>Patrocinadores</a>
+                    <a href='/quienes-somos/#patrocinadores'>Patrocinadores</a>
                   </li>
                 </ul>
               </div>
@@ -122,7 +123,7 @@
             <p>
               Elige tu equipo y entérate de todo lo que esta pasando.
             </p>
-            <form action='/subscribir/' id='subscribe_form' method='post' name='subscribe-form' target='_blank'>
+            <form action='/contacta/' id='subscribe_form' method='post' name='subscribe-form' target='_blank'>
               <div class='clearfix'>
                 <input class='span4' name='EMAIL' placeholder='correo electrónico' type='email' />
                 <input class='btn' name='subscribe' type='submit' value='Apúntate' />
@@ -139,7 +140,6 @@
                 +34-686-280858              </h3>
                 <p>
                 &copy; 2012 <a href="/" title="Club In-Line Sancti Petri - Escuelas de patinaje y hockey en Chiclana de la Frontera, Cádiz">Club In-Line Sancti Petri</a>. Todos los derechos reservados.
-                &nbsp;<a href='/terminos/'>Términos</a>&nbsp;&&nbsp;<a href='/privacidad/'>Privacidad</a>.
               </p>
             </div>
             <div class='span2 ar' id='elsewhere-msg'>
