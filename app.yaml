@@ -19,7 +19,11 @@ handlers:
 
 - url: /favicon\.ico
   static_files: static/ico/favicon.ico
-  upload: favicon\.ico
+  upload: static/ico/favicon\.ico
+  
+- url: /sitemap\.xml
+  static_files: static/sitemap.xml
+  upload: static/sitemap\.xml
 
 - url: .*
   script: main.app

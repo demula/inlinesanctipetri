@@ -1,27 +1,33 @@
 ﻿<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta http-equiv="X-UA-Compatible" content="IE=IE8" >
 <html lang="es">
 <head>
-<meta http-equiv="content-type" content="text/html">
-    <meta charset="utf-8">
-    <title>{{ page_name }} - {{ site_name }}</title>
+	<title>{{ page_name }} - {{ site_name }}</title>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web informativa del club deportivo Inline Sacti Petri. Club de hockey línea de Chiclana, Cádiz">
+    <meta name="description" content="{{ page_description }}">
     <meta name="author" content="Jesus de Mula">
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="M2K49sAbOufsx4lOa1mEGDdTcH2PWpLbKnZu3kduj9E" />
+
     <!-- Le styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/sanctipetri.css" rel="stylesheet">
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+           <link href="css/bootstrap.css" rel="stylesheet">
+           <link href="css/sanctipetri.css" rel="stylesheet">
+           <![endif]-->
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="icon/favicon.ico">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+	
   </head>
 
   <body>
@@ -32,7 +38,7 @@
           <a class="brand" href="/"><img id="logo_club" alt='Logo Club' src='/img/logow.jpg' />{{ site_name }}</a>
             <ul class="nav">
               <li{% if page_name == 'Portada' %} class="active" {% endif %}><a href="/">Inicio</a></li>
-              <li{% if page_name == 'Escuelas' or page_name == 'Categoria Senior' %} class="active" {% endif %}><a href="/escuelas/">Escuelas</a></li>
+              <li{% if page_name == 'Escuelas' %} class="active" {% endif %}><a href="/escuelas/">Escuelas</a></li>
               <li{% if page_name == 'Competiciones' %} class="active" {% endif %}><a href="/competiciones/">Competiciones</a></li>
               <li{% if page_name == 'Quienes Somos' %} class="active" {% endif %}><a href="/quienes-somos/">Quienes somos</a></li>
               <li{% if page_name == 'Contacta' %} class="active" {% endif %}><a href="/contacta/">Contacta</a></li>
@@ -61,11 +67,11 @@
                     <a href='/escuelas/#patinaje'>Patinaje para niños</a>
                   </li>
 				  <li>
-                    <a href='/senior/#patinaje'>Patinaje Adultos</a>
+                    <a href='/escuelas/#patinaje'>Patinaje Adultos</a>
 					<span class='label success'>Nuevo</span>
                   </li>
                   <li>
-                    <a href='/senior/#equipo'>Senior</a>
+                    <a href='/quienes-somos/#equipo'>Senior</a>
                   </li>
                 </ul>
               </div>
@@ -73,19 +79,19 @@
                 <h4>Competiciones</h4>
                 <ul class='unstyled'>
                   <li>
-                    <a href='/competiciones/#peques'>Campeonato infantil de Andalucía</a>
+                    <a href='/competiciones/#tab2'>Campeonato infantil de Andalucía</a>
                   </li>
 				  <li>
-                    <a href='/competiciones/#juvenil'>Campeonato juvenil de Andalucía</a>
+                    <a href='/competiciones/#tab3'>Campeonato juvenil de Andalucía</a>
                   </li>
 				  <li>
-                    <a href='/competiciones/#ligasenior'>Liga andaluza senior</a>
+                    <a href='/competiciones/#tab1'>Liga andaluza senior</a>
                   </li>
 				  <li>
-                    <a href='/competiciones/#winterclassic'>Torneo "Winter Classic"</a>
+                    <a href='/competiciones/#tab4'>Torneo "Winter Classic"</a>
                   </li>
 				  <li>
-                    <a href='/competiciones/#torneodeverano'>Torneo de verano "Ciudad de Chiclana"</a>
+                    <a href='/competiciones/#tab5'>Torneo de verano "Ciudad de Chiclana"</a>
                   </li>
                 </ul>
               </div>
@@ -99,13 +105,13 @@
                     <a href='/quienes-somos/'>Conócenos</a>
                   </li>
                   <li>
-                    <a href='/quienes-somos/#junta'>Junta directiva</a>
+                    <a href='/quienes-somos/#tab1'>Junta directiva</a>
                   </li>
                   <li>
                     <a href='/contacta/'>Contacta</a>
                   </li>
                   <li>
-                    <a href='/#patrocinadores'>Patrocinadores</a>
+                    <a href='/quienes-somos/#tab4'>Patrocinadores</a>
                   </li>
                 </ul>
               </div>
@@ -118,9 +124,9 @@
             <p>
               Elige tu equipo y entérate de todo lo que esta pasando.
             </p>
-            <form action='/subscribir/' id='subscribe_form' method='post' name='subscribe-form' target='_blank'>
+            <form action='/contacta/' id='Formulario' method='post' name='Formulario'>
               <div class='clearfix'>
-                <input class='span4' name='EMAIL' placeholder='correo electrónico' type='email' />
+                <input class='span4' name='email' placeholder='Email' type='text' />
                 <input class='btn' name='subscribe' type='submit' value='Apúntate' />
               </div>
             </form>
@@ -134,8 +140,8 @@
               <h3 id='phone'>
                 +34-686-280858              </h3>
                 <p>
-                &copy; 2012 <a href="/" title="Club In-Line Sancti Petri - Escuelas de patinaje y hockey en Chiclana de la Frontera, Cádiz">Club In-Line Sancti Petri</a>. Todos los derechos reservados.
-                &nbsp;<a href='/terminos/'>Términos</a>&nbsp;&&nbsp;<a href='/privacidad/'>Privacidad</a>.
+                <img src="https://developers.google.com/appengine/images/appengine-silver-120x30.gif" 
+alt="Powered by Google App Engine" />   &copy; 2012 <a href="/" title="Club In-Line Sancti Petri - Escuelas de patinaje y hockey en Chiclana de la Frontera, Cádiz">Club In-Line Sancti Petri</a>. Todos los derechos reservados.
               </p>
             </div>
             <div class='span2 ar' id='elsewhere-msg'>
