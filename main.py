@@ -17,7 +17,12 @@
 import jinja2
 import os
 import random
+import cgi
+from google.appengine.api import users
 import webapp2
+import logging
+from google.appengine.api import mail
+
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(
@@ -69,6 +74,7 @@ class QuienesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('quienes_somos.html')
         self.response.out.write(template.render(template_values))
 
+
 class ContactaHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
@@ -77,8 +83,46 @@ class ContactaHandler(webapp2.RequestHandler):
             'site_name': u"Club In-Line Sancti Petri",
             'site_address': u"http://www.inlinesanctipetri.com"
         }
+
         template = jinja_environment.get_template('contacta.html')
         self.response.out.write(template.render(template_values))
+
+    def post(self):
+        mensaje_confirmacion = u'Gracias! Te contesto lo antes posible'
+        mensaje = False
+        error= False
+        # datos del POST
+        nombre = self.request.get("nombre")
+        email = self.request.get("email")
+        comentario = self.request.get("comentario")
+
+        # log ip de envio de email
+        logging.info('Peticion de envio de mail desde %s con %s' % (self.request.remote_addr, email))
+        # enviar el correo
+        email_del_servidor = 'Inline Sancti Petri web <admin@inlinesanctipetri.com>'
+        #bcc_email = 'Jesus <jdemula@gmail.com>'
+        para = 'Secretario <secretario@inlinesanctipetri.com>'
+        titulo_correo = 'Consulta desde la Web'
+        texto_email = "Nombre: %s\nRemite: %s\nComentario: %s\n" % (nombre, email, comentario)
+        try:
+            mail.send_mail(sender=email_del_servidor, to=para,
+                    subject=titulo_correo, body=texto_email)
+            mensaje = mensaje_confirmacion
+        except:
+            error= u"Ha habido un error en su peticion"
+        finally:
+            # respuesta web
+            template_values = {
+                'page_name': u"Contacta",
+                'page_description': u"Formulario de contacto del club deportivo de hockey Inline Sancti Petri de Chiclana, Cádiz",
+                'site_name': u"Club In-Line Sancti Petri",
+                'site_address': u"http://www.inlinesanctipetri.com",
+                'message': mensaje,
+                'error': error
+            }
+            template = jinja_environment.get_template('contacta.html')
+            self.response.out.write(template.render(template_values))
+
 
 class ApuntateHandler(webapp2.RequestHandler):
     def get(self):
@@ -90,9 +134,6 @@ class ApuntateHandler(webapp2.RequestHandler):
         }
         template = jinja_environment.get_template('apuntate.html')
         self.response.out.write(template.render(template_values))
-
-
-
 
 app = webapp2.WSGIApplication([('/', MainHandler),
                               ('/escuelas/', EscuelasHandler),

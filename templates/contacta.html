@@ -2,6 +2,21 @@
 {% block body %}
     <div class="container content">
       <!-- Example row of columns -->
+	  <br>
+	  <div class="row">
+	  {% if message %}
+	  <div class="alert fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+      </div>
+	  {% endif %}
+	  {% if error %}
+	  <div class="alert alert-error fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ error }}
+      </div>
+	  {% endif %}
+	  </div>
       <div class="row">
         <br>
 	    <div class="span2">
@@ -9,23 +24,23 @@
 		  </div>
         <div class="span7">
           <h3>Contacta</h3>
-          <form class="form-horizontal" action='/contacta/' id='subscribe_form' method='post' name='contac-form' target='_blank'>
+          <form class="form-horizontal" action='/contacta/' id='Formulario' method='post' name='Formulario'>
   <div class="control-group">
-    <label class="control-label" for="inputEmail"></label>
+    <label class="control-label" for="email"></label>
     <div class="controls">
-      <input type="text" id="inputEmail" placeholder="Email">
+      Tu correo:    <input type="text" name="email" id="email" placeholder="Email">
     </div>
   </div>
   <div class="control-group">
-    <label class="control-label" for="inputName"></label>
+    <label class="control-label" for="nombre"></label>
     <div class="controls">
-      <input type="text" id="inputName" placeholder="Nombre">
+      Tu nombre:   <input type="text" name="nombre" id="nombre" placeholder="Nombre">
     </div>
 	</div>
 	  <div class="control-group">
-    <label class="control-label" for="inputTextarea"></label>
+    <label class="control-label" for="comentario"></label>
     <div class="controls">
-	  <textarea rows="8" type="text" id="inputTextarea" placeholder="Aquí su texto..."></textarea>
+	  Comentario: <textarea rows="8" type="text" name="comentario" id="comentario" placeholder="Aquí su texto..."></textarea>
     </div>
   </div>
   <div class="control-group">
@@ -34,6 +49,7 @@
     </div>
   </div>
 </form>
+
         </div>
         <div class="span3">
           <img alt='logo club' src='/img/inlinesplogo.jpg' />
@@ -44,6 +60,7 @@
 	  <div class="span1">
 	  <a href="http://www.xiti.com/xiti.asp?s=296742" title="WebAnalytics" target="_top">
 <script type="text/javascript">
+$(".alert").alert();
 <!--
 Xt_param = 's=296742&p=contacta';
 try {Xt_r = top.document.referrer;}
