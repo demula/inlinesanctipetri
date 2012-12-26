@@ -2,19 +2,82 @@
 {% block body %}
     <div class="container content">
       <!-- Example row of columns -->
+	  <br>
+	  <div class="row">
+	  {% if message %}
+	  <div class="alert fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+      </div>
+	  {% endif %}
+	  {% if error %}
+	  <div class="alert alert-error fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ error }}
+      </div>
+	  {% endif %}
+	  </div>
       <div class="row">
         <br>
 	    <div class="span2">
-          <img alt='mantenimiento' src='/img/ooops.jpg' />
+          <img alt='mantenimiento' src='/img/Hockey_Helmet.jpg' />
 		  </div>
         <div class="span7">
-          <h2>Contacta</h2>
-          <p>El Club deportivo In Line Sancti Petri blal blala blaaa fgffjfg f g  rg  ersgrgsser  grserg ergsrg errg r se r egg e grsgs  e gr r  r r er gserg gseghtjyu jy h  tshh  hw5h 5h5   erge t  j  shht hh th eth   heth ejkghjhj tyrytyr huhuihuihu jjk ytyuhujkgj hghjghghjgj uggyuu gyugyugyugyu yugyugygyu  gyugyyuug uggygyg gyugyuhbjbhbhjbh hjhjhgj jhhjhgjhj jhghjghjghj hjhjgihgjh  fghfjfghfg gghjghjghj gjggkgh hjgghjggj hjghjgj hgjkggkh ghjgj hjghjgj hjghgjkghj gjfghgffhfth te hsth hth hst h he htht ehetheth ethset hset htehteh heth sh j 6j6  5 5 4 gr her   gre rgth tshtsht hst h</p>
+          <h3>Contacta</h3>
+          <form class="form-horizontal" action='/contacta/' id='Formulario' method='post' name='Formulario'>
+  <div class="control-group">
+    <label class="control-label" for="email"></label>
+    <div class="controls">
+      Tu correo:    <input type="text" name="email" id="email" placeholder="Email">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="nombre"></label>
+    <div class="controls">
+      Tu nombre:   <input type="text" name="nombre" id="nombre" placeholder="Nombre">
+    </div>
+	</div>
+	  <div class="control-group">
+    <label class="control-label" for="comentario"></label>
+    <div class="controls">
+	  Comentario: <textarea rows="8" type="text" name="comentario" id="comentario" placeholder="Aquí su texto..."></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Enviar</button>
+    </div>
+  </div>
+</form>
+
         </div>
         <div class="span3">
           <img alt='logo club' src='/img/inlinesplogo.jpg' />
         </div>
       </div>
       <br>
+	  	<div class="row">
+	  <div class="span1">
+	  <a href="http://www.xiti.com/xiti.asp?s=296742" title="WebAnalytics" target="_top">
+<script type="text/javascript">
+$(".alert").alert();
+<!--
+Xt_param = 's=296742&p=contacta';
+try {Xt_r = top.document.referrer;}
+catch(e) {Xt_r = document.referrer; }
+Xt_h = new Date();
+Xt_i = '<img width="80" height="15" border="0" alt="" ';
+Xt_i += 'src="http://logv7.xiti.com/bcg.xiti?'+Xt_param;
+Xt_i += '&hl='+Xt_h.getHours()+'x'+Xt_h.getMinutes()+'x'+Xt_h.getSeconds();
+if(parseFloat(navigator.appVersion)>=4)
+{Xt_s=screen;Xt_i+='&r='+Xt_s.width+'x'+Xt_s.height+'x'+Xt_s.pixelDepth+'x'+Xt_s.colorDepth;}
+document.write(Xt_i+'&ref='+Xt_r.replace(/[<>"]/g, '').replace(/&/g, '$')+'" title="Internet Audience">');
+//-->
+</script>
+<noscript>
+Mesure d'audience ROI statistique webanalytics par <img width="80" height="15" src="http://logv7.xiti.com/bcg.xiti?s=296742&p=contacta" alt="WebAnalytics" />
+</noscript></a>
+</div>
+	  </div>
     </div>
 {% endblock %}

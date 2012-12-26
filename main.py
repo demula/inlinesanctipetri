@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+﻿#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # Copyright 2007 Google Inc.
 #
@@ -17,7 +17,12 @@
 import jinja2
 import os
 import random
+import cgi
+from google.appengine.api import users
 import webapp2
+import logging
+from google.appengine.api import mail
+
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(
@@ -25,11 +30,12 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        header_images = ["cabecera1w.jpg", "cabecera1w.jpg", "cabecera2w.jpg", "cabecera3w.jpg", "cabecera3w.jpg", "cabecera4w.jpg"]
+        header_images = [u"cabecera1w.jpg", u"cabecera1w.jpg", u"cabecera2w.jpg", u"cabecera3w.jpg", u"cabecera3w.jpg", u"cabecera4w.jpg"]
         template_values = {
-            'page_name': "Portada",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com",
+            'page_name': u"Portada",
+            'site_name': u"Club In-Line Sancti Petri",
+            'site_address': u"http://www.inlinesanctipetri.com",
+            'page_description': u"Web informativa del club deportivo Inline Sancti Petri. Club de hockey línea en Chiclana, Cádiz",
             'header_image': random.choice(header_images)
         }
         template = jinja_environment.get_template('index.html')
@@ -38,29 +44,21 @@ class MainHandler(webapp2.RequestHandler):
 class EscuelasHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Escuelas",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
+            'page_name': u"Escuelas",
+            'site_name': u"Club In-Line Sancti Petri",
+            'page_description': u"Escuelas deportivas de patinaje y hockey línea en el club deportivo Inline Sancti Petri de Chiclana, Cádiz",
+            'site_address': u"http://www.inlinesanctipetri.com"
         }
         template = jinja_environment.get_template('escuelas.html')
-        self.response.out.write(template.render(template_values))
-
-class SeniorHandler(webapp2.RequestHandler):
-    def get(self):
-        template_values = {
-            'page_name': "Categoria Senior",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
-        }
-        template = jinja_environment.get_template('senior.html')
         self.response.out.write(template.render(template_values))
 
 class CompeticionesHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Competiciones",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
+            'page_name': u"Competiciones",
+            'site_name': u"Club In-Line Sancti Petri",
+            'page_description': u"Calendario de competiciones de hockey línea: ligas, campeonatos y torneos del club deportivo Inline Sancti Petri de Chiclana, Cádiz",
+            'site_address': u"http://www.inlinesanctipetri.com"
         }
         template = jinja_environment.get_template('competiciones.html')
         self.response.out.write(template.render(template_values))
@@ -68,50 +66,79 @@ class CompeticionesHandler(webapp2.RequestHandler):
 class QuienesHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Quienes Somos",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
+            'page_name': u"Quienes Somos",
+            'page_description': u"Trayectoria, trofeos, organización y equipo senior de hockey línea del club deportivo Inline Sancti Petri de Chiclana, Cádiz",
+            'site_name': u"Club In-Line Sancti Petri",
+            'site_address': u"http://www.inlinesanctipetri.com"
         }
         template = jinja_environment.get_template('quienes_somos.html')
         self.response.out.write(template.render(template_values))
 
+
 class ContactaHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Contacta",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
+            'page_name': u"Contacta",
+            'page_description': u"Formulario de contacto del club deportivo de hockey Inline Sancti Petri de Chiclana, Cádiz",
+            'site_name': u"Club In-Line Sancti Petri",
+            'site_address': u"http://www.inlinesanctipetri.com"
         }
+
         template = jinja_environment.get_template('contacta.html')
         self.response.out.write(template.render(template_values))
+
+    def post(self):
+        mensaje_confirmacion = u'Gracias! Te contesto lo antes posible'
+        mensaje = False
+        error= False
+        # datos del POST
+        nombre = self.request.get("nombre")
+        email = self.request.get("email")
+        comentario = self.request.get("comentario")
+
+        # log ip de envio de email
+        logging.info('Peticion de envio de mail desde %s con %s' % (self.request.remote_addr, email))
+        # enviar el correo
+        email_del_servidor = 'Inline Sancti Petri web <admin@inlinesanctipetri.com>'
+        #bcc_email = 'Jesus <jdemula@gmail.com>'
+        para = 'Secretario <secretario@inlinesanctipetri.com>'
+        titulo_correo = 'Consulta desde la Web'
+        texto_email = "Nombre: %s\nRemite: %s\nComentario: %s\n" % (nombre, email, comentario)
+        try:
+            mail.send_mail(sender=email_del_servidor, to=para,
+                    subject=titulo_correo, body=texto_email)
+            mensaje = mensaje_confirmacion
+        except:
+            error= u"Ha habido un error en su peticion"
+        finally:
+            # respuesta web
+            template_values = {
+                'page_name': u"Contacta",
+                'page_description': u"Formulario de contacto del club deportivo de hockey Inline Sancti Petri de Chiclana, Cádiz",
+                'site_name': u"Club In-Line Sancti Petri",
+                'site_address': u"http://www.inlinesanctipetri.com",
+                'message': mensaje,
+                'error': error
+            }
+            template = jinja_environment.get_template('contacta.html')
+            self.response.out.write(template.render(template_values))
+
 
 class ApuntateHandler(webapp2.RequestHandler):
     def get(self):
         template_values = {
-            'page_name': "Apuntate",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
+            'page_name': u"Apuntate",
+            'page_description': u"Formulario de alta en la lista de correos del club deportivo de hockey Inline Sancti Petri de Chiclana, Cádiz",
+            'site_name': u"Club In-Line Sancti Petri",
+            'site_address': u"http://www.inlinesanctipetri.com"
         }
         template = jinja_environment.get_template('apuntate.html')
         self.response.out.write(template.render(template_values))
 
-class SubscribirHandler(webapp2.RequestHandler):
-    def get(self):
-        template_values = {
-            'page_name': "Subscribir",
-            'site_name': "Club In-Line Sancti Petri",
-            'site_address': "http://www.inlinesanctipetri.com"
-        }
-        template = jinja_environment.get_template('subscribir.html')
-        self.response.out.write(template.render(template_values))
-
-
 app = webapp2.WSGIApplication([('/', MainHandler),
                               ('/escuelas/', EscuelasHandler),
-                              ('/senior/', SeniorHandler),
                               ('/competiciones/', CompeticionesHandler),
                               ('/quienes-somos/', QuienesHandler),
                               ('/contacta/', ContactaHandler),
-                              ('/apuntate/', ApuntateHandler),
-                              ('/subscribir/', SubscribirHandler)],
+                              ('/apuntate/', ApuntateHandler),],
                               debug=True)
