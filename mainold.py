@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+﻿#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # Copyright 2007 Google Inc.
 #
@@ -18,7 +18,6 @@ import jinja2
 import os
 import random
 import cgi
-import re
 from google.appengine.api import users
 import webapp2
 import logging
@@ -29,13 +28,9 @@ jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(
         os.path.join(os.path.dirname(__file__), "templates")))
 
-regex_url = re.compile("(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))\\)|[^\\s`!()\\[\\]{};:'\\\".,<>?«»“”‘’]))",re.IGNORECASE)
-
-regex_email = re.compile("[^@^\\s]+@[^@^\\s]+\\.[^@^\\s]+", re.IGNORECASE)
-
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        header_images = [u"cabecera1w.jpg", u"cabecera5w.jpg", u"cabecera1w.jpg", u"cabecera2w.jpg", u"cabecera5w.jpg", u"cabecera3w.jpg", u"cabecera3w.jpg", u"cabecera4w.jpg"]
+        header_images = [u"cabecera1w.jpg", u"cabecera5w.jpg", u"cabecera1w.jpg", u"cabecera2w.jpg", u"cabecera5w.jpg", u"cabecera3w.jpg", u"cabecera3w.jpg", u"cabecera4w.jpg", u"cabecera5w.jpg"]
         template_values = {
             'page_name': u"Portada",
             'site_name': u"Club In-Line Sancti Petri",
@@ -93,20 +88,13 @@ class ContactaHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
 
     def post(self):
-        mensaje_confirmacion = u'Gracias! Te contestamos lo antes posible'
+        mensaje_confirmacion = u'Gracias! Te contesto lo antes posible'
         mensaje = False
         error= False
         # datos del POST
         nombre = self.request.get("nombre")
         email = self.request.get("email")
         comentario = self.request.get("comentario")
-
-        # miramos sin nos estan mandando spam
-        if(regex_url.search(nombre) or 
-                regex_url.search(comentario) or 
-                regex_url.search(email)): 
-            logging.info('SPAM desde %s email %s mensaje: %s' % (self.request.remote_addr, email, comentario[:50]))
-            return
 
         # log ip de envio de email
         logging.info('Peticion de envio de mail desde %s con %s' % (self.request.remote_addr, email))
